@@ -48,6 +48,7 @@
    border:solid black;
    border-radius: 10px;
    text-align: center   ;
+   
     
    
 }
@@ -122,3 +123,13 @@ img{
     margin-top:-300px;
     margin-left:520px;
 }
+span{
+
+    font-size: large;
+    font-family:'Courier New', Courier, monospace;
+    color:rgb(54, 64, 182);
+    color:linear-gradient(90deg,rgba(21, 33, 161, 1) 50%,rgba(7, 7, 9, 1) 50%);
+     margin-left:36% ;
+     
+}
+

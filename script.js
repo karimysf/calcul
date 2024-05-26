@@ -1,4 +1,4 @@
-let s = document.getElementById("resultat");
+const s = document.getElementById("resultat");
 
 function showresult(a) {
     if (s.innerText === "0") {
@@ -18,35 +18,51 @@ function delet() {
 
 const buttons = document.querySelectorAll(".m");
 buttons.forEach(button => {
-    button.addEventListener("click", () => showresult(button.value.toString()));
+    button.addEventListener("click", () => {
+        const str = s.innerText;
+        const coleur =s.style.color;
+        if (!s.innerText.includes("="))
+        showresult(button.value.toString());
+        if (!testsyntaxe(s.innerText)) {
+            s.innerText="";
+            s.style.color="red";
+            s.style.fontSize="Larger"
+            s.innerText = "ERROR SYNTAX!";
+           
+            setTimeout(() => {
+               
+                
+                s.innerText = str;
+                s.style.color=coleur;
+            }, 1000);
+        }
+    });
 });
 
 const res = document.getElementById("res");
 res.addEventListener("click", () => {
-    if (s.innerText.includes("="))
-        s.innerText="";
-    else
-    showresult("=" + calculateresult(s.innerText).toString());
+    if (!s.innerText.includes("=") && s.innerText !== "") {
+        showresult("=" + calculateresult(s.innerText).toString());
+    }
+    else s.innerText="";
 });
 
 document.addEventListener("keydown", (event) => {
     const k = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "x"];
-    if (s.innerText.includes("="))
-        s.innerText="";
-    else {
-    if (event.key === "Backspace") {
-        delet();
-    } 
-   if (k.includes(event.key)) {
-        showresult(event.key);
-    }  if (event.key === "=" ) {
-        showresult("=" + calculateresult(s.innerText).toString());
-    } }    
+    if (!s.innerText.includes("=") && s.innerText !== "") {
+        if (event.key === "Backspace") {
+            delet();
+        } else if (k.includes(event.key)) {
+            showresult(event.key);
+        } else if (event.key === "=" || event.key === "Enter") {
+            showresult("=" + calculateresult(s.innerText).toString());
+        }
+    }
 });
 
 function calculateresult(s) {
     let result = 0;
-    const L = ["+", "-", "/", "x"];
+    const L = ["+", "-", "/", "x", "."];
     let s2 = "";
     let i = 0;
     while (i < s.length) {
@@ -56,21 +72,33 @@ function calculateresult(s) {
         }
         s2 = s.substring(i, j);
         if (i === 0) {
-            result = parseInt(s2, 10);
+            result = parseFloat(s2);
         } else {
             if (s[i - 1] === "+") {
-                result += parseInt(s2, 10);
+                result += parseFloat(s2);
             } else if (s[i - 1] === "-") {
-                result -= parseInt(s2, 10);
+                result -= parseFloat(s2);
             } else if (s[i - 1] === "x") {
-                result =result*parseInt(s2, 10);
+                result *= parseFloat(s2);
             } else if (s[i - 1] === "/") {
-                result /= parseInt(s2, 10);
+                result /= parseFloat(s2);
+            }
+            else if (s[i-1]=="."){
+                result+=parseFloat(s2,10)/Math.pow(10,s2.length)
             }
         }
-        i = j+1 ;
+        i = j + 1;
     }
     return result;
 }
 
-console.log(calculateresult(s.innerText))
+function testsyntaxe(a) {
+    const L = ["+", "-", "/", "x", ".", "="];
+    for (let i = 0; i < a.length - 1; i++) {
+        if (L.includes(a[i]) && L.includes(a[i + 1])) {
+            return false;
+        }
+    
+    }
+    return true;
+}
