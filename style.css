@@ -40,8 +40,8 @@
     width:400;
  background-color: whitesmoke;
  height: 90px;
-     margin-left:auto;
-     margin-right:auto;
+ 
+    
  
 }
 .class1{
@@ -87,6 +87,7 @@ background: linear-gradient(90deg, rgba(180,201,202,1) 0%, rgba(0,207,255,0) 100
     height: 55px;
     width: 90px;
     margin-left: -74px;
+
     
     
    
@@ -120,16 +121,34 @@ background: linear-gradient(90deg, rgba(180,201,202,1) 0%, rgba(0,207,255,0) 100
     margin-top:-55px
 }
 img{
-    margin-top:-300px;
-    margin-left:520px;
+    margin-top:-390px;
+    margin-left:690px;
+    
 }
 span{
 
     font-size: large;
     font-family:'Courier New', Courier, monospace;
-    color:rgb(54, 64, 182);
+    color:rgb(79, 79, 213);
     color:linear-gradient(90deg,rgba(21, 33, 161, 1) 50%,rgba(7, 7, 9, 1) 50%);
      margin-left:36% ;
      
+     
+     
+}
+.ligne1{
+    width:20px;
+    height:50px;
+}
+.a:active{
+    transition:ease-in-out;
+    background: rgb(49, 41, 204);
+    background: linear-gradient(90deg, rgb(13, 119, 146) 0%, rgba(16, 137, 165, 0) 100%);
+    
 }
 
+body {
+    background-image:url("r.jpg");
+    background-size: cover;
+    
+}
